@@ -1,0 +1,3 @@
+snap_me_upload_homepage:
+    path:     /
+    defaults: { _controller: SnapMeUploadBundle:Default:index }

@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block title 'SnapMe' %}
+{% block description 'Upload tes plus belles photos' %}
+
+{% block body %}
+    <p>Tous les <b>15 du mois</b>, le BDE mettra <b>en avant</b> les plus belles photos que vous aurez envoyées. Elles seront affichées <b>sur le mur de la cellule</b>.</p>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+        <div class="input-append">
+            <form class="form" method ="POST"  enctype="multipart/form-data" action="{{path('snap_me_upload_homepage')}}">
+                <input name="img" id="file-fr" class="file" type="file" multiple data-min-file-count="1">
+                <p class="help-block">Seuls les fichiers au format <b>.jpg</b> et <b>.png</b> de <b>moins de 2 Mo</b> seront acceptés.</p>
+            </form>
+        </div>
+    </div>
+{% endblock body %}

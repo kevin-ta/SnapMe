@@ -1,0 +1,4 @@
+services:
+#    snap_me_upload.example:
+#        class: SnapMe\UploadBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
