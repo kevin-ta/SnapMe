@@ -52,7 +52,7 @@ class DefaultController extends Controller
             $document->processFile();
             $uploadedURL = $document->getUploadDirectory() . DIRECTORY_SEPARATOR . $document->getSubDirectory() . DIRECTORY_SEPARATOR . $file->getBasename();
 
-            return $this->render('SnapMeUploadBundle:Default:index.html.twig');
+            return $this->render('SnapMeUploadBundle:Default:success.html.twig');
         } else {
             return $this->render('SnapMeUploadBundle:Default:index.html.twig');
         }
