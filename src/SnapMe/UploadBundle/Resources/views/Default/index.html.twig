@@ -4,13 +4,17 @@
 {% block description 'Upload tes plus belles photos' %}
 
 {% block body %}
-    <p>Tous les <b>15 du mois</b>, le BDE mettra <b>en avant</b> les plus belles photos que vous aurez envoyées. Elles seront affichées <b>sur le mur de la cellule</b>.</p>
-    <div class="fileupload fileupload-new" data-provides="fileupload">
-        <div class="input-append">
-            <form class="form" method ="POST"  enctype="multipart/form-data" action="{{path('snap_me_upload_homepage')}}">
-                <input name="img" id="file-fr" class="file" type="file" multiple data-min-file-count="1">
-                <p class="help-block">Seuls les fichiers au format <b>.jpg</b> et <b>.png</b> de <b>moins de 2 Mo</b> seront acceptés.</p>
-            </form>
-        </div>
+	<div class="col-md-6 col-md-offset-3">
+        <h1 id="name">Upload tes plus belles photos</h1>
+        </br>
+    	<p>Tous les <b>15 du mois</b>, le BDE mettra en avant les plus <b>belles photos (ou gros dossier)</b> que vous aurez envoyées. Elles seront affichées <b>sur le mur de la cellule</b>.</p>
+    	<div class="fileupload fileupload-new" data-provides="fileupload">
+        	<div class="input-append">
+           		<form class="form" method ="POST"  enctype="multipart/form-data" action="{{path('snap_me_upload_homepage')}}">
+                	<input name="img" id="file-fr" class="file .btn-group" type="file" multiple data-min-file-count="1">
+                	<p class="help-block">Seuls les fichiers au format <b>.jpg</b> et <b>.png</b> de <b>moins de 2 Mo</b> seront acceptés.</p>
+            	</form>
+        	</div>
+    	</div>
     </div>
 {% endblock body %}

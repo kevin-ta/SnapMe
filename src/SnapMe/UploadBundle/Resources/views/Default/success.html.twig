@@ -4,8 +4,11 @@
 {% block description 'Upload tes plus belles photos.' %}
 
 {% block body %}
-    <p>Nous avons bien reçu ta photo. En récompense, nous te raconterons la fin de Game of Thones.</br></br>Sinon, tu peux toujours en envoyer une autre.</p>
-    </br>
+    <div class="col-md-6 col-md-offset-3">
+        <h1 id="name">Upload tes plus belles photos</h1>
+        </br>
+        <p>Nous avons bien reçu ta photo. En récompense, nous te raconterons la fin de Game of Thrones.</br></br>Sinon, tu peux toujours en envoyer une autre.</p>
+        </br>
         <p class="hidden-xs">
             <a class="btn btn-primary btn-lg" href="{{ path('snap_me_upload_homepage') }}">Allez, une dernière photo</a>
             <a class="btn btn-default btn-lg" href="{{ path('snap_me_upload_homepage') }}">Fin de Game of Thrones</a>
