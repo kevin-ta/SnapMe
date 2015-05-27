@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron" style="margin-top: 40px">
+        <h1>Oups.. Une fourberie a été détectée</h1>
+        <p>Renommer l'extension ne fonctionnera pas</p>
+        <p class="hidden-xs">
+            <a class="btn btn-primary btn-lg" href="{{ path('snap_me_upload_homepage') }}">Se faire fouetter par le BDE</a>
+            <a class="btn btn-default btn-lg" href="{{ path('snap_me_upload_homepage') }}">Ne plus refaire cette blague</a>
+        </p>
+        <p class="visible-xs-block">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ path('snap_me_upload_homepage') }}">Se faire fouetter par le BDE</a><br>
+            <a class="btn btn-default btn-lg btn-block" href="{{ path('snap_me_upload_homepage') }}">Ne plus refaire cette blague</a>
+        </p>
+    </div>
+{% endblock %}

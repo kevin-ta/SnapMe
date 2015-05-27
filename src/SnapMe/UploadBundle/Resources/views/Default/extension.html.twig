@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron" style="margin-top: 40px">
+        <h1>Oups.. Le fichier est invalide</h1>
+        <p>Nous n'acceptons que les fichiers au format .jpg et .png.</p>
+        <p class="hidden-xs">
+            <a class="btn btn-primary btn-lg" href="{{ path('snap_me_upload_homepage') }}">Recommencer l'envoi</a>
+        </p>
+        <p class="visible-xs-block">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ path('snap_me_upload_homepage') }}">Recommencer l'envoi</a>
+        </p>
+    </div>
+{% endblock %}

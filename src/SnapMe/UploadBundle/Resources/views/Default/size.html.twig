@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron" style="margin-top: 40px">
+        <h1>Le fichier est beaucoup trop lourd</h1>
+        <p>Pourquoi ne pas réduire la résolution de ta photo ?</p>
+        <p class="hidden-xs">
+            <a class="btn btn-primary btn-lg" href="{{ path('snap_me_upload_homepage') }}">Allons sur Paint</a>
+        </p>
+        <p class="visible-xs-block">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ path('snap_me_upload_homepage') }}">Allons sur Paint</a>
+        </p>
+    </div>
+{% endblock %}
