@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use SnapMe\UploadBundle\Models\Document;
-use SnapMe\UploadBundle\Entity\Upload;
 
 class DefaultController extends Controller
 {
@@ -15,44 +14,47 @@ class DefaultController extends Controller
     {
         if ($request->getMethod() == 'POST') {
             $file = $request->files->get('img');
-
-            $valid_filetypes = array('jpg', 'png');
+            $valid_filetypes = array('jpg', 'png','jpeg');
             
             if ($file instanceof UploadedFile) {
                 
                 if($file->getError()=='0'){
 
-                $originalName = explode('.', $file->getClientOriginalName());
-                //print_r(' Size : '.$file->getSize());
+                    $originalName = explode('.', $file->getClientOriginalName());
 
+                    if (!($file->getSize() < 2000000)) {
+                        return $this->render('SnapMeUploadBundle:Default:size.html.twig');
+                    }
 
-                if (!($file->getSize() < 2000000)) {
-                    //print_r('Size Exceeds Limit');
-                    die();
+                    if (!(in_array(strtolower($originalName[sizeof($originalName) - 1]), $valid_filetypes))) {
+                        return $this->render('SnapMeUploadBundle:Default:extension.html.twig');
+                    }
+
+                    if(!($file->getMimeType()=="image/jpeg")){
+                        return $this->render('SnapMeUploadBundle:Default:mime.html.twig');
+                    }
+
+                    if(!($file->getMimeType()=="image/png")){
+                        return $this->render('SnapMeUploadBundle:Default:mime.html.twig');
+                    }
+
                 }
-
-                if (!(in_array(strtolower($originalName[sizeof($originalName) - 1]), $valid_filetypes))) {
-                    //print_r('Invalid File Type');
-                    die();
+                else{
+                    return $this->render('SnapMeUploadBundle:Default:error.html.twig');
                 }
             }
             else{
-                //print_r('Upload Error Check File Size and Type');
-                die();
-            }
-            }
-            else{
-                //print_r('Upload Error');
-                die();
+                return $this->render('SnapMeUploadBundle:Default:error.html.twig');
             }
            
             $document = new Document();
             $document->setFile($file);
-            $document->setSubDirectory('myuploads');
+            $document->setSubDirectory('snapme');
             $document->processFile();
             $uploadedURL = $document->getUploadDirectory() . DIRECTORY_SEPARATOR . $document->getSubDirectory() . DIRECTORY_SEPARATOR . $file->getBasename();
 
             return $this->render('SnapMeUploadBundle:Default:success.html.twig');
+
         } else {
             return $this->render('SnapMeUploadBundle:Default:index.html.twig');
         }
