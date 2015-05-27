@@ -8,8 +8,6 @@ class UploadFileMover {
 
     public function moveUploadedFile(UploadedFile $file, $uploadBasePath,$relativePath) {
         $originalName = $file->getFilename();
-        // use filemtime() to have a more determenistic way to determine the subpath, otherwise its hard to test.
-       // $relativePath = date('Y-m', filemtime($file->getPath()));
         $targetFileName = $relativePath . DIRECTORY_SEPARATOR . $originalName;
         $targetFilePath = $uploadBasePath . DIRECTORY_SEPARATOR . $targetFileName;
         $ext = $file->getExtension();
@@ -24,8 +22,7 @@ class UploadFileMover {
             }
         }
 
-
-        $targetDir = '/home/cover77/uploads';
+        $targetDir = '%kernel.root_dir%/../web/uploads';
         if (!is_dir($targetDir)) {
             $ret = mkdir($targetDir, 777, true);
             if (!$ret) {

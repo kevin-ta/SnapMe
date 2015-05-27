@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  
 class Document
 {
-    
     private $file;
     
     private $subDir;
@@ -14,7 +13,7 @@ class Document
     private $filePersistencePath;
     
     /** @var string */
-    protected static $uploadDirectory = '%kernel.root_dir%/../uploads';
+    protected static $uploadDirectory = '%kernel.root_dir%/../web/uploads';
     
     static public function setUploadDirectory($dir)
     {
