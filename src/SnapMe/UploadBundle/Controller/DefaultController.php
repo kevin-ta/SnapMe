@@ -24,23 +24,20 @@ class DefaultController extends Controller
 
                     if (!($file->getSize() < 2000000)) {
                         return $this->render('SnapMeUploadBundle:Default:size.html.twig');
+
                     }
 
                     if (!(in_array(strtolower($originalName[sizeof($originalName) - 1]), $valid_filetypes))) {
                         return $this->render('SnapMeUploadBundle:Default:extension.html.twig');
                     }
 
-                    if(!($file->getMimeType()=="image/jpeg")){
-                        return $this->render('SnapMeUploadBundle:Default:mime.html.twig');
-                    }
-
-                    if(!($file->getMimeType()=="image/png")){
+                    if(!($file->getMimeType()=="image/jpeg" or $file->getMimeType()=="image/png")){
                         return $this->render('SnapMeUploadBundle:Default:mime.html.twig');
                     }
 
                 }
                 else{
-                    return $this->render('SnapMeUploadBundle:Default:error.html.twig');
+                    return $this->render('SnapMeUploadBundle:Default:errorupload.html.twig');
                 }
             }
             else{
