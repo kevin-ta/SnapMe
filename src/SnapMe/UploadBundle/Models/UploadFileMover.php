@@ -22,7 +22,7 @@ class UploadFileMover {
             }
         }
 
-        $targetDir = '%kernel.root_dir%/../web/uploads';
+        $targetDir = 'uploads';
         if (!is_dir($targetDir)) {
             $ret = mkdir($targetDir, 777, true);
             if (!$ret) {
