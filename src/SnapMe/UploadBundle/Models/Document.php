@@ -67,7 +67,7 @@ class Document
             return false;
         }
         $uploadFileMover = new UploadFileMover();
-        $this->filePersistencePath = $uploadFileMover->moveUploadedFile($this->file, self::getUploadDirectory(),$this->subDir);
+        $this->filePersistencePath = $uploadFileMover->moveUploadedFile($this->file, self::getUploadDirectory(), $this->subDir);
     }
 }
 ?>

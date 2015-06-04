@@ -1,3 +1,7 @@
 snap_me_upload_homepage:
     path:     /
     defaults: { _controller: SnapMeUploadBundle:Default:index }
+
+snap_me_upload_list_image:
+    path:     /image
+    defaults: { _controller: SnapMeUploadBundle:Default:listImage }

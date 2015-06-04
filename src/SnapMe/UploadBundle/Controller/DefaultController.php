@@ -56,4 +56,23 @@ class DefaultController extends Controller
             return $this->render('SnapMeUploadBundle:Default:index.html.twig');
         }
     }
+
+    public function listImageAction()
+    {
+        $dir_nom = 'uploads'; // dossier listé (pour lister le répertoir courant : $dir_nom = '.'  --> ('point')
+        $dir     = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
+        $fichier = array(); // on déclare le tableau contenant le nom des fichiers
+         
+        while($element = readdir($dir)) {
+            if($element != '.' && $element != '..' && $element != '.gitkeep') {
+                if (!is_dir($dir_nom.'/'.$element)) {
+                    $fichier[] = $element;
+                }
+            }
+        }
+
+        return $this->render('SnapMeUploadBundle:Default:list_image.html.twig', array(
+            'images' => $fichier,
+        ));
+    }
 }

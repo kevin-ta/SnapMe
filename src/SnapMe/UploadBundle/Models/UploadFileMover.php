@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class UploadFileMover {
 
     public function moveUploadedFile(UploadedFile $file, $uploadBasePath,$relativePath) {
-        $originalName = $file->getFilename();
+        $originalName = $file->getFilename().'.'.$file->guessExtension();
         $targetFileName = $relativePath . DIRECTORY_SEPARATOR . $originalName;
         $targetFilePath = $uploadBasePath . DIRECTORY_SEPARATOR . $targetFileName;
         $ext = $file->getExtension();
