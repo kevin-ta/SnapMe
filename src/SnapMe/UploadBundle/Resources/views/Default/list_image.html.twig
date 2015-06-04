@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block title 'SnapMe' %}
+{% block description 'Liste des photos uploadées' %}
+
+{% block body %}
+    <div class="col-sm-12">
+        <h1 id="name">{{ block('description') }}</h1>
+        </br>
+        {% for image in images %}
+            <img src="{{ asset('uploads/' ~ image) }}" /><br />
+        {% endfor %}
+    </div>
+{% endblock body %}
