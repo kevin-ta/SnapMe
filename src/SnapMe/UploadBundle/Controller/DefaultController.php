@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use SnapMe\UploadBundle\Models\Document;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class DefaultController extends Controller
 {
@@ -75,4 +76,58 @@ class DefaultController extends Controller
             'images' => $fichier,
         ));
     }
+    
+    public function listImageAdminAction()
+    {
+        $dir_nom = 'uploads'; // dossier listé (pour lister le répertoir courant : $dir_nom = '.'  --> ('point')
+        $dir     = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
+        $fichier = array(); // on déclare le tableau contenant le nom des fichiers
+         
+        while($element = readdir($dir)) {
+            if($element != '.' && $element != '..' && $element != '.gitkeep') {
+                if (!is_dir($dir_nom.'/'.$element)) {
+                    $fichier[] = $element;
+                }
+            }
+        }
+
+        return $this->render('SnapMeUploadBundle:Default:list_image_admin.html.twig', array(
+            'images' => $fichier,
+        ));
+    }
+    
+    public function deleteImageAction($imageName) {
+        // supprimer le fichier
+        $dir_nom = 'uploads';
+        unlink($dir_nom . '/' . $imageName);
+        
+        // mettre un message de confirmation dans le flashbag
+        $this->addFlash('notice', 'We should have deleted your image. But we are not sure.');
+        
+        // rediriger vers la liste des images ou whatever
+        return $this->redirectToRoute('snap_me_upload_list_image_admin');
+    }
+    
+    public function loginAction(Request $request){
+        $pwd = $request->request->get('pwd');
+        
+        if (!empty($pwd)) {
+            if ($pwd === 'sécure') {
+                $token = new UsernamePasswordToken(
+                    'admin',
+                    null,
+                    'snapme_admin',
+                    array('ROLE_ADMIN')
+                );
+                
+                $this->container->get('security.context')->setToken($token);
+                $this->get('session')->set('_security_snapme_admin', serialize($token));
+                
+                return $this->redirectToRoute('snap_me_upload_list_image_admin');
+            }
+        }
+        
+        return $this->render('SnapMeUploadBundle:Default:login.html.twig');
+    }
+    
 }
