@@ -1,14 +1,19 @@
 {% extends '::base.html.twig' %}
 
 {% block title 'SnapMe' %}
-{% block description 'Liste des photos uploadées' %}
+{% block description 'Toutes les photos sur SnapMe' %}
 
 {% block body %}
     <div class="col-sm-12">
         <h1 id="name">{{ block('description') }}</h1>
         </br>
+        <div class="row">
         {% for image in images %}
-            <img src="{{ asset('uploads/' ~ image) }}" /><br />
+          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+             <p> <a href="{{ asset('uploads/' ~ image) }}" data-toggle="lightbox" data-gallery="multiimages">
+                 <img  src="{{ asset('uploads/' ~ image) }}" class="img-responsive"></a>
+            </p></div>
         {% endfor %}
+        </div>
     </div>
 {% endblock body %}
