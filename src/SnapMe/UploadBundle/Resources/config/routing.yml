@@ -5,3 +5,15 @@ snap_me_upload_homepage:
 snap_me_upload_list_image:
     path:     /image
     defaults: { _controller: SnapMeUploadBundle:Default:listImage }
+
+snap_me_upload_login:
+    path:     /login
+    defaults: { _controller: SnapMeUploadBundle:Default:login }
+
+snap_me_upload_list_image_admin:
+    path:     /image_admin
+    defaults: { _controller: SnapMeUploadBundle:Default:listImageAdmin }
+
+snap_me_upload_admin_delete_image:
+    path:     /delete/{imageName}
+    defaults: { _controller: SnapMeUploadBundle:Default:deleteImage }
