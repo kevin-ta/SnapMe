@@ -129,5 +129,4 @@ class DefaultController extends Controller
         
         return $this->render('SnapMeUploadBundle:Default:login.html.twig');
     }
-    
 }
