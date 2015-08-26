@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block title 'SnapMe' %}
-{% block description 'Toutes les photos sur SnapMe' %}
+{% block description 'Panel Admin SnapMe' %}
 
 {% block body %}
     <div class="col-sm-12">
@@ -12,6 +12,8 @@
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
              <p> <a href="{{ asset('uploads/' ~ image) }}" data-toggle="lightbox" data-gallery="multiimages">
                  <img  src="{{ asset('uploads/' ~ image) }}" class="img-responsive"></a>
+                 <a href="{{ asset('uploads/' ~ image) }}" class="btn btn-primary" role="button" download>Download</a>
+                 <a class="btn btn-danger" href="{{ path('snap_me_upload_admin_delete_image', {imageName: image}) }}" role="button">Delete</a>
             </p></div>
         {% endfor %}
         </div>
