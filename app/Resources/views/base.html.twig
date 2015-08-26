@@ -14,6 +14,7 @@
             <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" type='text/css' />
             <link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
             <link href="{{asset('css/ekko-lightbox.min.css')}}" rel="stylesheet" type="text/css" />
+            <link href="{{asset('css/sweetalert.css')}}" rel="stylesheet" type="text/css" >
         {% endblock %}
     </head>
     <body>
@@ -30,18 +31,46 @@
     <script src="{{asset('js/bootstrap-fileupload.min.js')}}"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="{{asset('js/ekko-lightbox.min.js')}}"></script>
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
     <script>
     $('#file-fr').fileinput({
         language: 'fr',
         allowedFileExtensions : ['jpg', 'png','jpeg'],
         maxFileSize: 2000,
     });
-    </script>
-    <script>
+
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
     }); 
+
+    $('button.delete-photo').click(function() {
+        var photoId = $(this).attr("data-photo-id");
+        deletePhoto(photoId);
+    });
+
+    function deletePhoto(photoId) {
+        swal({
+          title: "Êtes-vous sûr ?", 
+          text: "Êtes-vous sûr de vouloir supprimer cette photo ?", 
+          type: "warning",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          confirmButtonText: "Oui, supprimez-là!",
+          confirmButtonColor: "#ec6c62"
+        }, function() {
+          $.ajax({
+            url: "delete/" + photoId,
+            type: "DELETE"
+          })
+          .done(function(data) {
+            swal("Supprimé!", "Votre photo a bien été supprimée!", "success");
+          })
+          .error(function(data) {
+            swal("Oops", "Une erreur interne est survenue!", "error");
+          });
+        });
+    }
     </script>
     {% endblock %}
     </body>
