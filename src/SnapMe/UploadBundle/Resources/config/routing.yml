@@ -17,3 +17,7 @@ snap_me_upload_list_image_admin:
 snap_me_upload_admin_delete_image:
     path:     /delete/{imageName}
     defaults: { _controller: SnapMeUploadBundle:Default:deleteImage }
+
+snap_me_upload_download_all:
+    path:     /downloadAll
+    defaults: { _controller: SnapMeUploadBundle:Default:downloadAll }

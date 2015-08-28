@@ -7,13 +7,15 @@
     <div class="col-sm-12">
         <h1 id="name">{{ block('description') }}</h1>
         </br>
+        <a href="{{ path('snap_me_upload_download_all') }}" class="btn btn-info" role="button" >Télécharger toutes les photos</a>
+        </br></br></br>
         <div class="row">
         {% for image in images %}
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
              <p> <a href="{{ asset('uploads/' ~ image) }}" data-toggle="lightbox" data-gallery="multiimages">
                  <img  src="{{ asset('uploads/' ~ image) }}" class="img-responsive"></a>
-                 <a href="{{ asset('uploads/' ~ image) }}" class="btn btn-primary" role="button" download>Download</a>
-                 <button class="btn btn-danger delete-photo" data-photo-id="{{image}}" role="button">Delete</button>
+                 <a href="{{ asset('uploads/' ~ image) }}" class="btn btn-primary" role="button" download>Télécharger</a>
+                 <button class="btn btn-danger delete-photo" data-photo-id="{{image}}" role="button">Supprimer</button>
             </p></div>
         {% endfor %}
         </div>

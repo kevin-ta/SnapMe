@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use SnapMe\UploadBundle\Models\Document;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use \ZipArchive;
 
 class DefaultController extends Controller
 {
@@ -96,19 +98,18 @@ class DefaultController extends Controller
         ));
     }
     
-    public function deleteImageAction($imageName) {
+    public function deleteImageAction($imageName)
+    {
         // supprimer le fichier
         $dir_nom = 'uploads';
         unlink($dir_nom . '/' . $imageName);
-        
-        // mettre un message de confirmation dans le flashbag
-        $this->addFlash('notice', 'We should have deleted your image. But we are not sure.');
         
         // rediriger vers la liste des images ou whatever
         return $this->redirectToRoute('snap_me_upload_list_image_admin');
     }
     
-    public function loginAction(Request $request){
+    public function loginAction(Request $request)
+    {
         $pwd = $request->request->get('pwd');
         
         if (!empty($pwd)) {
@@ -128,5 +129,36 @@ class DefaultController extends Controller
         }
         
         return $this->render('SnapMeUploadBundle:Default:login.html.twig');
+    }
+
+    public function downloadAllAction()
+    {
+        $zip = new ZipArchive();
+      
+        if(is_dir('uploads/'))
+        {    
+            if($zip->open('backup/archive.zip', ZIPARCHIVE::OVERWRITE) == TRUE)
+            {
+                $fichiers = scandir('uploads/');
+                unset($fichiers[0], $fichiers[1], $fichiers[2]);
+      
+                foreach($fichiers as $f)
+                {
+                    $zip->addFile('uploads/'.$f, $f);
+                }
+        
+                // On ferme l’archive.
+                $zip->close();
+            
+                // On peut ensuite, comme dans le tuto de DHKold, proposer le téléchargement.
+                header('Content-Transfer-Encoding: binary'); //Transfert en binaire (fichier).
+                header('Content-Disposition: attachment; filename="archive.zip"'); //Nom du fichier.
+                header('Content-Length: '.filesize('backup/archive.zip')); //Taille du fichier.
+
+                readfile('backup/archive.zip');
+            }
+        }
+
+        return $this->render('SnapMeUploadBundle:Default:index.html.twig');
     }
 }

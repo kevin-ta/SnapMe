@@ -2,6 +2,7 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /web/uploads/*
+/web/uploads/backup/*
 /app/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
